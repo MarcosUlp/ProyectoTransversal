@@ -3,45 +3,44 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package transversal;
+package UniverdadAccesoDatos;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author Marcos
+ * @author Emanuel Sosa
  */
-public class Transversal {
+public class Conexion {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        try {
+    private static final String URL = "jdbc:mariadb://localhost:3306/univesidadg3";
+    private static final String usuario = "root";
+    private static final String password = "";
 
-            //Cargo Driver de conexión
+    private static Connection connection;
+
+    private Conexion() {
+    }
+    private static Connection getConexion(){
+    if(connection==null){
+            try {
             Class.forName("org.mariadb.jdbc.Driver");
-
-            //Establecer la conexión
-            String URL = "jdbc:mariadb://localhost:3306/univesidadg3";
-            String usuario = "root";
-            String password = "";
             Connection con = DriverManager.getConnection(URL, usuario, password);
-//---------------------------------------------------------------------------------------------------------------------------------------------------------            
-            int filas = ps.executeUpdate();
-                if (filas > 0) {
-                    JOptionPane.showMessageDialog(null, "datos Agregados");
-                }
-            }catch (ClassNotFoundException ex) {
+            
+        } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, "Error al cargar Driver");
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error de conexión");
 
             int error = ex.getErrorCode();
-           ex.printStackTrace();
+            ex.printStackTrace();
+            
             if (error == 1146) {
                 JOptionPane.showMessageDialog(null, "Tabla inexistente");
             } else if (error == 1062) {
@@ -52,6 +51,6 @@ public class Transversal {
                 JOptionPane.showMessageDialog(null, "Error SQL");
             }
         }
+            return connection;
     }
-    
-}
+
