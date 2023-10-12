@@ -5,9 +5,9 @@
  */
 package UniverdadAccesoDatos;
 
-import Universidad.Entidades.Inscripcion;
-import Universidad.Entidades.Materia;
-import Universidad.Entidades.Alumno;
+import UniversidadEntidades.Inscripcion;
+import UniversidadEntidades.Materia;
+import UniversidadEntidades.Alumno;
 import java.sql.Connection;
 import java.util.List;
 

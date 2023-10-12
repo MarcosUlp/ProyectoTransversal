@@ -7,6 +7,7 @@ package transversal;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -20,38 +21,39 @@ public class Transversal {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        try {
-
-            //Cargo Driver de conexión
-            Class.forName("org.mariadb.jdbc.Driver");
-
-            //Establecer la conexión
-            String URL = "jdbc:mariadb://localhost:3306/univesidadg3";
-            String usuario = "root";
-            String password = "";
-            Connection con = DriverManager.getConnection(URL, usuario, password);
+        
+//        try {
+//
+//            Cargo Driver de conexión
+//            Class.forName("org.mariadb.jdbc.Driver");
+//
+//            Establecer la conexión
+//            String URL = "jdbc:mariadb://localhost:3306/univesidadg3";
+//            String usuario = "root";
+//            String password = "";
+//            Connection con = DriverManager.getConnection(URL, usuario, password);
 //---------------------------------------------------------------------------------------------------------------------------------------------------------            
-            int filas = ps.executeUpdate();
-                if (filas > 0) {
-                    JOptionPane.showMessageDialog(null, "datos Agregados");
-                }
-            }catch (ClassNotFoundException ex) {
-            JOptionPane.showMessageDialog(null, "Error al cargar Driver");
-        }catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error de conexión");
-
-            int error = ex.getErrorCode();
-           ex.printStackTrace();
-            if (error == 1146) {
-                JOptionPane.showMessageDialog(null, "Tabla inexistente");
-            } else if (error == 1062) {
-                JOptionPane.showMessageDialog(null, "Dni duplicado");
-            } else if (error == 1049) {
-                JOptionPane.showMessageDialog(null, "BD inexistente");
-            } else {
-                JOptionPane.showMessageDialog(null, "Error SQL");
-            }
-        }
+//            int filas = ps.executeUpdate();
+//                if (filas > 0) {
+//                    JOptionPane.showMessageDialog(null, "datos Agregados");
+//                }
+//            }catch (ClassNotFoundException ex) {
+//            JOptionPane.showMessageDialog(null, "Error al cargar Driver");
+//        }catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "Error de conexión");
+//
+//            int error = ex.getErrorCode();
+//           ex.printStackTrace();
+//            if (error == 1146) {
+//                JOptionPane.showMessageDialog(null, "Tabla inexistente");
+//            } else if (error == 1062) {
+//                JOptionPane.showMessageDialog(null, "Dni duplicado");
+//            } else if (error == 1049) {
+//                JOptionPane.showMessageDialog(null, "BD inexistente");
+//            } else {
+//                JOptionPane.showMessageDialog(null, "Error SQL");
+//            }
+//        }
     }
     
 }
