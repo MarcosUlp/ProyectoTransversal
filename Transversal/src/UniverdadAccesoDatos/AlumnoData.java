@@ -23,20 +23,20 @@ import javax.swing.JOptionPane;
 public class AlumnoData {
 
     private Connection con = null;
-
+    
     public AlumnoData() {
         con = Conexion.getConexion();
     }
 
     public void guardarAlumno(Alumno alumno) {
-        String sql = "INSERT INTO alumno (dni, apellido, nombre, fechaNacimiento, estado) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO alumno ( apellido, nombre, fechaDeNacimiento, estado) VALUES ( ?, ?, ?, ?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, alumno.getIdAlumno());
-            ps.setString(2, alumno.getApellido());
-            ps.setString(3, alumno.getNombre());
-            ps.setDate(4, Date.valueOf(alumno.getFechaNacimiento()));//localDate a Date
-            ps.setBoolean(5, alumno.isActivo()); // if reducido
+//            ps.setInt(1, alumno.getIdAlumno());
+            ps.setString(1, alumno.getApellido());
+            ps.setString(2, alumno.getNombre());
+            ps.setDate(3, Date.valueOf(alumno.getFechaNacimiento()));//localDate a Date
+            ps.setBoolean(4, alumno.isActivo()); // if reducido
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -174,6 +174,11 @@ public class AlumnoData {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Alumno");
         }
+    }
+
+    @Override
+    public String toString() {
+        return "AlumnoData{" + "con=" + con + '}';
     }
 
 }
