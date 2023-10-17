@@ -51,6 +51,7 @@ public class Conexion {
                 JOptionPane.showMessageDialog(null, "Error SQL");
             }
         }
-            return connection;
     }
-
+             return connection;
+    }
+}

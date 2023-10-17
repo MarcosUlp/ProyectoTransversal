@@ -22,6 +22,7 @@ public class Transversal {
      */
     public static void main(String[] args) {
         
+        
 //        try {
 //
 //            Cargo Driver de conexión

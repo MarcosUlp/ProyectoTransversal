@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package UniverdadAccesoDatos;
-
+import UniversidadEntidades.Alumno;
+import java.time.LocalDate;
 /**
  *
  * @author pollo
@@ -17,7 +18,10 @@ public class prueba {
     public static void main(String[] args) {
        
         AlumnoData a = new AlumnoData();
-        a.guardarAlumno("55325, 'prue', 'apellido', '1000-08-7', true");
+        Alumno alum=new Alumno("sosa", "arian",null, true);
+        a.guardarAlumno(alum);
+        Alumno alum2=new Alumno("d", "a",null, true);
+        a.guardarAlumno(alum2);
     }
     
 }
