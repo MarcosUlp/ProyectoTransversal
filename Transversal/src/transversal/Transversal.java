@@ -5,12 +5,16 @@
  */
 package transversal;
 
+import UniverdadAccesoDatos.AlumnoData;
+import UniverdadAccesoDatos.Conexion;
+import UniversidadEntidades.Alumno;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
-
+import UniverdadAccesoDatos.Conexion;
 /**
  *
  * @author Marcos
@@ -22,6 +26,13 @@ public class Transversal {
      */
     public static void main(String[] args) {
         
+        AlumnoData a = new AlumnoData();
+        Connection con = Conexion.getConexion();
+        Alumno alum2=new Alumno("marcos", "sosa",LocalDate.of(2000,5,31), true);
+        System.out.println(alum2);
+        System.out.println("coneccion "+con);
+        a.guardarAlumno(alum2);
+        System.out.println(con);
 //        try {
 //
 //            Cargo Driver de conexión
