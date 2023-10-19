@@ -15,6 +15,9 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import UniverdadAccesoDatos.Conexion;
+import UniverdadAccesoDatos.MateriaData;
+import UniversidadEntidades.Materia;
+
 /**
  *
  * @author Marcos
@@ -25,14 +28,25 @@ public class Transversal {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
-        AlumnoData a = new AlumnoData();
+
+        MateriaData mate = new MateriaData();
         Connection con = Conexion.getConexion();
-        Alumno alum2=new Alumno(123456, "marcos", "sosa", LocalDate.of(2000,5,31), true);
-        System.out.println(alum2);
-        System.out.println("coneccion "+con);
-        a.guardarAlumno(alum2);
+        Materia esi = new Materia("esi", 3, true);
+        System.out.println(esi);
+        mate.agregarMateria(esi);
+        System.out.println("coneccion " + con);
         System.out.println(con);
+        
+        //-------------------------------------------------------------------------------------       
+//        AlumnoData a = new AlumnoData();
+//        Connection con = Conexion.getConexion();
+//        Alumno alum2=new Alumno(123456, "marcos", "sosa", LocalDate.of(2000,5,31), true);
+//        System.out.println(alum2);
+//        System.out.println("coneccion "+con);
+//        a.guardarAlumno(alum2);
+//        System.out.println(con);
+//------------------------------------------------------------------------------------------        
+
 //        try {
 //
 //            Cargo Driver de conexión
@@ -66,5 +80,5 @@ public class Transversal {
 //            }
 //        }
     }
-    
+
 }

@@ -15,47 +15,46 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author Emanuel Sosa
  */
 public class MateriaData {
-           
-    private final Connection con ;
+
+    private final Connection con;
 
     public MateriaData() {
-        
+
         con = Conexion.getConexion();
-        
+
     }
-    
-    public void agregarMateria (Materia materia){
-        
+
+    public void agregarMateria(Materia materia) {
+
         String query = "INSERT INTO materia (nombre,anio,estado) VALUES (?,?,?);";
-          
-        try{
-            PreparedStatement st = con.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+
+        try {
+            PreparedStatement st = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             st.setString(1, materia.getNombre());
             st.setInt(2, materia.getAnioMateria());
-            st.setBoolean(3,materia.isActivo() );
+            st.setBoolean(3, materia.isActivo());
 
             st.executeUpdate();
 
             ResultSet resultado = st.getGeneratedKeys();
-            
-            if(resultado.next()){
+
+            if (resultado.next()) {
                 materia.setIdMateria(resultado.getInt(1));
+                JOptionPane.showMessageDialog(null, "La Materia se guardo correctamente");
             }
-            
-            JOptionPane.showMessageDialog(null, "La Materia se guardo correctamente");
-            
-            }catch(SQLException e){
-                
-                JOptionPane.showMessageDialog(null,"Error al guardar Materia ");
-                Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, e.getMessage() );
-            }
-            }
-    
-    
+
+           st.close();
+
+        } catch (SQLException e) {
+
+            JOptionPane.showMessageDialog(null, "Error al guardar Materia ");
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, e.getMessage());
+        }
+    }
+
 }
