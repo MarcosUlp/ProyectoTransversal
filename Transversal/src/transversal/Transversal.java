@@ -27,16 +27,45 @@ public class Transversal {
     /**
      * @param args the command line arguments
      */
+   
     public static void main(String[] args) {
-
-        MateriaData mate = new MateriaData();
+        AlumnoData a = new AlumnoData();
         Connection con = Conexion.getConexion();
-        Materia esi = new Materia("esi", 3, true);
-        System.out.println(esi);
-        mate.agregarMateria(esi);
-        System.out.println("coneccion " + con);
-        System.out.println(con);
         
+        a.modificarAlumno(alumno);
+        
+        
+        
+        
+//------------------------------------------------
+//        AlumnoData a = new AlumnoData();
+//        Connection con = Conexion.getConexion();
+//        for (Alumno alumno : a.listarAlumnos()) {
+//            System.out.println(alumno);
+//        }
+//----------------------------------------------------
+//        AlumnoData a = new AlumnoData();
+//        Connection con = Conexion.getConexion();
+//        a.eliminarAlumno(17);
+//-----------------------------------------------------
+//        AlumnoData a = new AlumnoData();
+//        Connection con = Conexion.getConexion();
+//        a.buscarAlumnoPorDni(12344);
+//        
+//-------------------------------------------------------------
+        //mostrar alumno encontrado falta por realizar
+//        AlumnoData a = new AlumnoData();
+//        Connection con = Conexion.getConexion();
+//        a.buscarAlumno(15);
+//----------------------------------------------------------------
+//        MateriaData mate = new MateriaData();
+//        Connection con = Conexion.getConexion();
+//        Materia esi = new Materia("esi", 3, true);
+//        System.out.println(esi);
+//        mate.agregarMateria(esi);
+//        System.out.println("coneccion " + con);
+//        System.out.println(con);
+//        
         //-------------------------------------------------------------------------------------       
 //        AlumnoData a = new AlumnoData();
 //        Connection con = Conexion.getConexion();
@@ -46,7 +75,6 @@ public class Transversal {
 //        a.guardarAlumno(alum2);
 //        System.out.println(con);
 //------------------------------------------------------------------------------------------        
-
 //        try {
 //
 //            Cargo Driver de conexión

@@ -51,11 +51,6 @@ public class Alumno {
         this.Dni = Dni;
     }
 
-    
-
-
-    
-    
     public int getIdAlumno() {
         return idAlumno;
     }
@@ -80,12 +75,12 @@ public class Alumno {
         this.nombre = nombre;
     }
 
-    public LocalDate getFechaNacimiento() {
+    public LocalDate getFechaDeNacimiento() {
         return fechaDeNacimiento;
     }
 
-    public void setFechaNacimiento(LocalDate fechaNacimiento) {
-        this.fechaDeNacimiento = fechaNacimiento;
+    public void setFechadeNacimiento(LocalDate fechaNacimiento) {
+        this.fechaDeNacimiento = fechaDeNacimiento;
     }
 
     public boolean isActivo() {
