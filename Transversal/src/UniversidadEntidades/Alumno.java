@@ -13,6 +13,7 @@ import java.time.LocalDate;
  */
 public class Alumno {
     private int idAlumno;
+    private int Dni;
     private String apellido;
     private String nombre;
     private LocalDate fechaDeNacimiento;
@@ -21,20 +22,37 @@ public class Alumno {
     public Alumno() {
     }
 
-    public Alumno(String apellido, String nombre, LocalDate fechaNacimiento, boolean activo) {
+    public Alumno(int idAlumno, int Dni, String apellido, String nombre, LocalDate fechaDeNacimiento, boolean estado) {
+        this.idAlumno = idAlumno;
+        this.Dni = Dni;
         this.apellido = apellido;
         this.nombre = nombre;
-        this.fechaDeNacimiento = fechaNacimiento;
+        this.fechaDeNacimiento = fechaDeNacimiento;
         this.estado = estado;
     }
 
-    public Alumno(int idAlumno, String apellido, String nombre, LocalDate fechaNacimiento, boolean activo) {
-        this.idAlumno = idAlumno;
+    public Alumno(int Dni, String apellido, String nombre, LocalDate fechaDeNacimiento, boolean estado) {
+        this.Dni = Dni;
         this.apellido = apellido;
         this.nombre = nombre;
-        this.fechaDeNacimiento = fechaNacimiento;
+        this.fechaDeNacimiento = fechaDeNacimiento;
         this.estado = estado;
     }
+
+    public Alumno(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public int getDni() {
+        return Dni;
+    }
+
+    public void setDni(int Dni) {
+        this.Dni = Dni;
+    }
+
+    
+
 
     
     
@@ -82,5 +100,7 @@ public class Alumno {
     public String toString() {
         return "Alumno{" + "idAlumno=" + idAlumno + ", apellido=" + apellido + ", nombre=" + nombre + ", fechaNacimiento=" + fechaDeNacimiento + ", activo=" + estado + '}';
     }
+
+   
     
 }

@@ -28,7 +28,7 @@ public class Transversal {
         
         AlumnoData a = new AlumnoData();
         Connection con = Conexion.getConexion();
-        Alumno alum2=new Alumno("marcos", "sosa",LocalDate.of(2000,5,31), true);
+        Alumno alum2=new Alumno(123456, "marcos", "sosa", LocalDate.of(2000,5,31), true);
         System.out.println(alum2);
         System.out.println("coneccion "+con);
         a.guardarAlumno(alum2);
