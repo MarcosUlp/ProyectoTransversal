@@ -9,7 +9,10 @@ import UniversidadEntidades.Inscripcion;
 import UniversidadEntidades.Materia;
 import UniversidadEntidades.Alumno;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,7 +27,23 @@ public class InscripcionData {
     public InscripcionData() {
     }
 
-    public void gaurdarInscripcion(Inscripcion insc) {
+    public void guardarInscripcion(Inscripcion insc) {
+        String sql = "INSERT INTO inscripcion (idInscripcion, idAlumno, idMateria, nota) VALUES (?, ?, ?, ?)";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, insc.getIdInscripcion());
+            ps.setInt(2, insc.getAlumno().getIdAlumno());
+            ps.setInt(3, insc.getMateria().getIdMateria());
+            ps.setDouble(4, insc.getNota());
+            int filasAfectadas = ps.executeUpdate();
+            if (filasAfectadas > 0) {
+                System.out.println("Inscripción guardada exitosamente.");
+            } else {
+                System.out.println("Error al guardar la inscripción.");
+            }
+        } catch (SQLException ex) {
+               JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno" + ex.getMessage());
+        }
     }
 
     List<Inscripcion> obtenerInscripciones() {

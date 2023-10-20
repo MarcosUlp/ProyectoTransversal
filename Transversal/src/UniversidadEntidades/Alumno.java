@@ -79,7 +79,7 @@ public class Alumno {
         return fechaDeNacimiento;
     }
 
-    public void setFechadeNacimiento(LocalDate fechaNacimiento) {
+    public void setFechaDeNacimiento(LocalDate fechaDeNacimiento) {
         this.fechaDeNacimiento = fechaDeNacimiento;
     }
 
@@ -95,7 +95,4 @@ public class Alumno {
     public String toString() {
         return "Alumno{" + "idAlumno=" + idAlumno + ", apellido=" + apellido + ", nombre=" + nombre + ", fechaNacimiento=" + fechaDeNacimiento + ", activo=" + estado + '}';
     }
-
-   
-    
 }

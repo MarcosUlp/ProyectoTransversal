@@ -15,28 +15,34 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import UniverdadAccesoDatos.Conexion;
+import UniverdadAccesoDatos.InscripcionData;
 import UniverdadAccesoDatos.MateriaData;
 import UniversidadEntidades.Materia;
-
-/**
- *
- * @author Marcos
- */
+import UniversidadEntidades.Inscripcion;
+import static java.lang.System.out;
 public class Transversal {
 
     /**
      * @param args the command line arguments
      */
-   
     public static void main(String[] args) {
         AlumnoData a = new AlumnoData();
-        Connection con = Conexion.getConexion();
-        
-        a.modificarAlumno(alumno);
-        
-        
-        
-        
+        InscripcionData insc = new InscripcionData();
+        Alumno alum=new Alumno();
+        a.buscarAlumno(15).getIdAlumno();
+
+        //------------------------------------------------------
+//        AlumnoData a = new AlumnoData();
+//        Alumno alumno = new Alumno();
+//        alumno.setIdAlumno(17);
+//        alumno.setDni(12345);
+//        alumno.setApellido("Pérez");
+//        alumno.setNombre("Juan");
+//        alumno.setFechaDeNacimiento((LocalDate.of(2000, 1, 1)));
+//        a.modificarAlumno(alumno);
+//        for (Alumno i : a.listarAlumnos()) {
+//            System.out.println(i);
+//        }
 //------------------------------------------------
 //        AlumnoData a = new AlumnoData();
 //        Connection con = Conexion.getConexion();
