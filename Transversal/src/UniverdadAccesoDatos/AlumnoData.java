@@ -61,13 +61,17 @@ public class AlumnoData {
             ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
+            if (rs.next()) { 
+                JOptionPane.showMessageDialog(null, "El alumno exite");
                 alumno = new Alumno();
                 alumno.setIdAlumno(id);
+                alumno.setDni(rs.getInt("dni"));
                 alumno.setApellido(rs.getString("apellido"));
                 alumno.setNombre(rs.getString("nombre"));
                 alumno.setFechaDeNacimiento((rs.getDate("fechaDeNacimiento").toLocalDate()));
                 alumno.setActivo(true);
+                
+                
             } else {
                 JOptionPane.showMessageDialog(null, "No existe el alumno");
                 ps.close();

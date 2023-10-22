@@ -26,10 +26,14 @@ public class Transversal {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
         AlumnoData a = new AlumnoData();
-        InscripcionData insc = new InscripcionData();
-        Alumno alum=new Alumno();
-        a.buscarAlumno(15).getIdAlumno();
+      
+       Alumno Encontrado = a.buscarAlumno(17);
+       System.out.println("Dni: "+Encontrado.getDni());
+       System.out.println("Apellido: "+Encontrado.getApellido());
+       System.out.println("Nombre: "+Encontrado.getNombre());
+       System.out.println("Fecha de nacimiento:"+Encontrado.getFechaDeNacimiento());
 
         //------------------------------------------------------
 //        AlumnoData a = new AlumnoData();
