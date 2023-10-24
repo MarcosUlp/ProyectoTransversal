@@ -27,8 +27,8 @@ public class InscripcionData {
     public InscripcionData() {
     }
 
-    public void guardarInscripcion(Inscripcion insc) {
-        String sql = "INSERT INTO inscripcion ( idAlumno, idMateria, nota) VALUES ( ?, ?, ?)";
+    public void guardarInscripcion(Inscripcion insc) { 
+        String sql = "INSERT INTO inscripcion(idInscripto, nota, idAlumno, idMateria) VALUES ( ?, ?, ?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
           //  ps.setInt(1, insc.getIdInscripcion());
