@@ -27,15 +27,38 @@ public class Transversal {
      */
     public static void main(String[] args) {
         
-        AlumnoData a = new AlumnoData();
-      
-       Alumno Encontrado = a.buscarAlumno(17);
-       System.out.println("Dni: "+Encontrado.getDni());
-       System.out.println("Apellido: "+Encontrado.getApellido());
-       System.out.println("Nombre: "+Encontrado.getNombre());
-       System.out.println("Fecha de nacimiento:"+Encontrado.getFechaDeNacimiento());
+ //------------------------Incripcion Data Pruebas------------------------------------------------}
+    AlumnoData alum = new AlumnoData();
+    MateriaData mtd = new MateriaData();
+    InscripcionData insdata = new InscripcionData();
+    
+    Alumno Marcos = alum.buscarAlumno(17);
+    Materia Lengua = mtd.buscarMateria(2);
+    Inscripcion insc = new Inscripcion(Marcos,Lengua,8);
+    
+    insdata.guardarInscripcion(insc);
+    
+    
+ 
+ //------------------------Buscar Materia id----------------------------------------------------
+//     MateriaData mtd = new MateriaData();
+//     Materia Encontrar = mtd.buscarMateria(1);
+//     
+//     System.out.println("Nombre: "+Encontrar.getNombre());
+//     System.out.println("Año: "+Encontrar.getAnioMateria());
+//     System.out.println("Estado: "+Encontrar.isActivo());
+ 
+ //------------------------Alumno Data Pruebas-------------------------------------------------------------   
+//-----------------------Buscar alumono por ID-----------------------------------------------------------        
+//        AlumnoData a = new AlumnoData();
+//      
+//       Alumno Encontrado = a.buscarAlumno(17);
+//       System.out.println("Dni: "+Encontrado.getDni());
+//       System.out.println("Apellido: "+Encontrado.getApellido());
+//       System.out.println("Nombre: "+Encontrado.getNombre());
+//       System.out.println("Fecha de nacimiento:"+Encontrado.getFechaDeNacimiento());
 
-        //------------------------------------------------------
+        //---------------Modificar alumno---------------------------------------
 //        AlumnoData a = new AlumnoData();
 //        Alumno alumno = new Alumno();
 //        alumno.setIdAlumno(17);
@@ -47,27 +70,27 @@ public class Transversal {
 //        for (Alumno i : a.listarAlumnos()) {
 //            System.out.println(i);
 //        }
-//------------------------------------------------
+//-----------------------Mostrar alumnos cargados-------------------------
 //        AlumnoData a = new AlumnoData();
 //        Connection con = Conexion.getConexion();
 //        for (Alumno alumno : a.listarAlumnos()) {
 //            System.out.println(alumno);
 //        }
-//----------------------------------------------------
+//----------------------Eliminar Alumno por id------------------------------
 //        AlumnoData a = new AlumnoData();
 //        Connection con = Conexion.getConexion();
 //        a.eliminarAlumno(17);
-//-----------------------------------------------------
+//------------------------Buescar Alumno por Dni-----------------------------
 //        AlumnoData a = new AlumnoData();
 //        Connection con = Conexion.getConexion();
 //        a.buscarAlumnoPorDni(12344);
 //        
-//-------------------------------------------------------------
+//------------------------------------------------------------- realizado
         //mostrar alumno encontrado falta por realizar
 //        AlumnoData a = new AlumnoData();
 //        Connection con = Conexion.getConexion();
 //        a.buscarAlumno(15);
-//----------------------------------------------------------------
+//--------------------------------Agregar Materias--------------------------------
 //        MateriaData mate = new MateriaData();
 //        Connection con = Conexion.getConexion();
 //        Materia esi = new Materia("esi", 3, true);
@@ -76,7 +99,7 @@ public class Transversal {
 //        System.out.println("coneccion " + con);
 //        System.out.println(con);
 //        
-        //-------------------------------------------------------------------------------------       
+        //------------------------------------Agregar alumno-------------------------------------------------       
 //        AlumnoData a = new AlumnoData();
 //        Connection con = Conexion.getConexion();
 //        Alumno alum2=new Alumno(123456, "marcos", "sosa", LocalDate.of(2000,5,31), true);

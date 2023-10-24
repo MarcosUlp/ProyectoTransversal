@@ -53,7 +53,7 @@ public class AlumnoData {
 
     }
 
-    public Alumno buscarAlumno(int id) { //PROBADO
+    public Alumno buscarAlumno(int id) { //PROBADO Por Arian ;)
         Alumno alumno = null;
         String sql = "SELECT dni, apellido, nombre, fechaDeNacimiento FROM alumno WHERE idAlumno = ? AND estado = 1";
         PreparedStatement ps = null;

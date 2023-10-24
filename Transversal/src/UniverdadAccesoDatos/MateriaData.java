@@ -56,5 +56,34 @@ public class MateriaData {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, e.getMessage());
         }
     }
+        public Materia buscarMateria(int id) { //PROBADO Por Arian ;)
+        Materia materia = null;
+      
+        String sql = "SELECT idMateria, nombre, anio, estado FROM materia WHERE idMateria = 1 AND estado = 1";
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) { 
+                JOptionPane.showMessageDialog(null, "La materia exite");
+                materia = new Materia();
+                materia.setIdMateria(id);
+                materia.setNombre(rs.getString("nombre"));
+                materia.setAnioMateria(rs.getInt("anio"));
+                materia.setActivo(true);
+              
+                
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe la materia");
+                ps.close();
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla materia " + ex.getMessage());
+            return materia;
+        }
+        return materia;
+    }
 
 }

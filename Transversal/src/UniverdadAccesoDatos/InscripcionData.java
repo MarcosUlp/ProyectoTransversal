@@ -28,13 +28,13 @@ public class InscripcionData {
     }
 
     public void guardarInscripcion(Inscripcion insc) {
-        String sql = "INSERT INTO inscripcion (idInscripcion, idAlumno, idMateria, nota) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO inscripcion ( idAlumno, idMateria, nota) VALUES ( ?, ?, ?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, insc.getIdInscripcion());
-            ps.setInt(2, insc.getAlumno().getIdAlumno());
-            ps.setInt(3, insc.getMateria().getIdMateria());
-            ps.setDouble(4, insc.getNota());
+          //  ps.setInt(1, insc.getIdInscripcion());
+            ps.setInt(1, insc.getAlumno().getIdAlumno());
+            ps.setInt(2, insc.getMateria().getIdMateria());
+            ps.setDouble(3, insc.getNota());
             int filasAfectadas = ps.executeUpdate();
             if (filasAfectadas > 0) {
                 System.out.println("Inscripción guardada exitosamente.");
