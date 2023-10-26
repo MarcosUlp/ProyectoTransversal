@@ -28,6 +28,7 @@ public class Transversal {
     public static void main(String[] args) {
         
  //------------------------Incripcion Data Pruebas------------------------------------------------}
+
 //    AlumnoData alum = new AlumnoData();
 //    MateriaData mtd = new MateriaData();
 //    InscripcionData insdata = new InscripcionData();
@@ -39,6 +40,17 @@ public class Transversal {
 //    insdata.guardarInscripcion(insc);
     //hoola
 //    ajaja
+
+//    AlumnoData alum = new AlumnoData();
+//    MateriaData mtd = new MateriaData();
+//    InscripcionData insdata = new InscripcionData();
+//    
+//    Alumno Marcos = alum.buscarAlumno(17);
+//    Materia Lengua = mtd.buscarMateria(1);
+//    Inscripcion insc = new Inscripcion(Marcos,Lengua,8);
+//    
+//    insdata.guardarInscripcion(insc);
+//  
     
  
  //------------------------Buscar Materia id----------------------------------------------------
