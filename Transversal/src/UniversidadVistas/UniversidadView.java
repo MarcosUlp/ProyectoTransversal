@@ -5,12 +5,15 @@
  */
 package UniversidadVistas;
 
+import UniversidadEntidades.Alumno;
+import java.util.ArrayList;
+
 /**
  *
  * @author Marcos
  */
 public class UniversidadView extends javax.swing.JFrame {
-
+    ArrayList<Alumno> ListasAlumnos = new ArrayList<>();
     /**
      * Creates new form UniversidadView
      */

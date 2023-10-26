@@ -12,6 +12,7 @@ import UniverdadAccesoDatos.AlumnoData;
 import UniverdadAccesoDatos.Conexion;
 import java.sql.Connection;
 import java.time.Month;
+import java.time.ZoneId;
 
 /**
  *
@@ -50,7 +51,7 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
         jtNombre = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
         jrbEstado = new javax.swing.JRadioButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jdcFecha = new com.toedter.calendar.JDateChooser();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setText("Alumno");
@@ -75,6 +76,11 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
         });
 
         jButton4.setText("Salir");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Estado:");
 
@@ -99,7 +105,7 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addGap(56, 56, 56)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jdcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addComponent(jButton1)
@@ -170,7 +176,7 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
                             .addComponent(jButton4))
                         .addGap(32, 32, 32))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jdcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -179,22 +185,30 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        try{
-        int documento = Integer.parseInt(jtDocumento.getText());
-        String apellido = jtApellido.getText();
-        String nombre = jtNombre.getText();
-        boolean estado = jrbEstado.isSelected();
-        
-        Alumno a = new Alumno(documento, apellido, nombre, LocalDate.of(2000,02,2), estado);
-        
-        AlumnoData data = new AlumnoData();
-        Connection con = Conexion.getConexion();
-        data.guardarAlumno(a);
-        
-        }catch(NumberFormatException ex){
+        try {
+            int documento = Integer.parseInt(jtDocumento.getText());
+            String apellido = jtApellido.getText();
+            String nombre = jtNombre.getText();
+            boolean estado = jrbEstado.isSelected();
+//            java.util.Date Date = java.util.Date .from(jdcFecha.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            if (nombre.isEmpty() && apellido.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No debe haber campos vacios");
+                return;
+            }
+            Alumno a = new Alumno(documento, apellido, nombre, LocalDate.of(2000, 02, 2), estado);
+            AlumnoData data = new AlumnoData();
+            Connection con = Conexion.getConexion();
+            data.guardarAlumno(a);
+
+        } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Debe ingresar caracteres validos");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -203,16 +217,23 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private com.toedter.calendar.JDateChooser jdcFecha;
     private javax.swing.JRadioButton jrbEstado;
     private javax.swing.JTextField jtApellido;
     private javax.swing.JTextField jtDocumento;
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
+
+    public void Limpiar() {
+        jtApellido.setText("");
+        jtDocumento.setText("");
+        jtNombre.setText("");
+//        jrbEstado.set();
+    }
 }
