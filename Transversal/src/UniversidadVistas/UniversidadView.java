@@ -16,6 +16,7 @@ public class UniversidadView extends javax.swing.JFrame {
      */
     public UniversidadView() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

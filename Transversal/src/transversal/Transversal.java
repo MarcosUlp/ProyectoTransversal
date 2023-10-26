@@ -38,7 +38,7 @@ public class Transversal {
 //    
 //    insdata.guardarInscripcion(insc);
     //hoola
-    ajaja
+//    ajaja
     
  
  //------------------------Buscar Materia id----------------------------------------------------
