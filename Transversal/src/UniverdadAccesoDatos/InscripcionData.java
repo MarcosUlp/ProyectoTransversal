@@ -27,14 +27,15 @@ public class InscripcionData {
     public InscripcionData() {
     }
 
-    public void guardarInscripcion(Inscripcion insc) { 
-        String sql = "INSERT INTO inscripcion(idInscripto, nota, idAlumno, idMateria) VALUES ( ?, ?, ?)";
+    public void guardarInscripcion(Inscripcion insc) {
+        String sql = "INSERT INTO inscripcion( nota, idAlumno, idMateria) VALUES ( ?, ?, ?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-          //  ps.setInt(1, insc.getIdInscripcion());
-            ps.setInt(1, insc.getAlumno().getIdAlumno());
-            ps.setInt(2, insc.getMateria().getIdMateria());
-            ps.setDouble(3, insc.getNota());
+            //  ps.setInt(1, insc.getIdInscripcion());
+            ps.setDouble(1, insc.getNota());
+            ps.setInt(2, insc.getAlumno().getIdAlumno());
+            ps.setInt(3, insc.getMateria().getIdMateria());
+
             int filasAfectadas = ps.executeUpdate();
             if (filasAfectadas > 0) {
                 System.out.println("Inscripción guardada exitosamente.");
@@ -42,7 +43,7 @@ public class InscripcionData {
                 System.out.println("Error al guardar la inscripción.");
             }
         } catch (SQLException ex) {
-               JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno" + ex.getMessage());
         }
     }
 
