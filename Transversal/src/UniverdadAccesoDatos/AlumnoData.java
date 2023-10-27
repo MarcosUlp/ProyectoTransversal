@@ -38,9 +38,7 @@ public class AlumnoData {
             ps.setDate(4, Date.valueOf(alumno.getFechaDeNacimiento()));//localDate a Date
             ps.setBoolean(5, alumno.isActivo()); // if reducido
             ps.executeUpdate();
-
             ResultSet rs = ps.getGeneratedKeys();
-
             if (rs.next()) {
                 alumno.setIdAlumno(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Alumno añadido con exito.");

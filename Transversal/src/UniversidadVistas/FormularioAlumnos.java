@@ -13,6 +13,7 @@ import UniverdadAccesoDatos.Conexion;
 import java.sql.Connection;
 import java.time.Month;
 import java.time.ZoneId;
+import java.util.Date;
 
 /**
  *
@@ -184,24 +185,21 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
         try {
             int documento = Integer.parseInt(jtDocumento.getText());
             String apellido = jtApellido.getText();
             String nombre = jtNombre.getText();
             boolean estado = jrbEstado.isSelected();
-//            java.util.Date Date = java.util.Date .from(jdcFecha.atStartOfDay(ZoneId.systemDefault()).toInstant());
-            if (nombre.isEmpty() && apellido.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "No debe haber campos vacios");
+            LocalDate fechaNacimiento = jdcFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            if (nombre.isEmpty() || apellido.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No debe haber campos vacíos");
                 return;
             }
-            Alumno a = new Alumno(documento, apellido, nombre, LocalDate.of(2000, 02, 2), estado);
+            Alumno a = new Alumno(documento, apellido, nombre, fechaNacimiento, estado);
             AlumnoData data = new AlumnoData();
-            Connection con = Conexion.getConexion();
             data.guardarAlumno(a);
-
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Debe ingresar caracteres validos");
+            JOptionPane.showMessageDialog(this, "Debe ingresar caracteres válidos: " + ex.getMessage());
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
