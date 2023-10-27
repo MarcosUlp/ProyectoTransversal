@@ -27,7 +27,7 @@ public class Conexion {
     private static final String DATABASE_USUARIO = "root";
     private static final String DATABASE_PASSWORD = "";
     private static Conexion conexion = null;
-
+    private static Connection con=null;
     private Conexion() {
         try {
             //Cargar drivers
@@ -39,9 +39,9 @@ public class Conexion {
     }
 
     public static Connection getConexion() {
-        Connection con = null;
+ //       Connection con = null;
 
-        if (conexion == null) {
+        if (con == null) {
             conexion = new Conexion();
 
             try {
