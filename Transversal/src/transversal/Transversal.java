@@ -20,27 +20,52 @@ import UniverdadAccesoDatos.MateriaData;
 import UniversidadEntidades.Materia;
 import UniversidadEntidades.Inscripcion;
 import static java.lang.System.out;
+
 public class Transversal {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+
+        //------------------------Incripcion Data Pruebas------------------------------------------------}
+         MateriaData md = new MateriaData();
+          Materia mate = md.buscarMateria(1);
+         AlumnoData ad = new AlumnoData();
+       Alumno ricardo = ad.buscarAlumno(15);
+        InscripcionData id = new InscripcionData();
         
- //------------------------Incripcion Data Pruebas------------------------------------------------}
+        
+       
+       
 
-//    AlumnoData alum = new AlumnoData();
+
+        Inscripcion insc = new Inscripcion(ricardo, mate, 8);
+
+        id.guardarInscripcion(insc);
+//       id.actualizarNota(14, 1, 7);
+//      id.borrarInscripcionMateriaAlumno(14, 1);
+
 //    MateriaData mtd = new MateriaData();
+//     Materia Encontrar = mtd.buscarMateria(1);
+//     
+//     System.out.println("Nombre: "+Encontrar.getNombre());
+//     System.out.println("Año: "+Encontrar.getAnioMateria());
+//     System.out.println("Estado: "+Encontrar.isActivo());
+//    System.out.println("-------------------------------------------");
+//     AlumnoData alum = new AlumnoData();
+//      Alumno Marcos = alum.buscarAlumno(17);
+//     System.out.println("nombre: "+Marcos.getNombre());
+//     System.out.println("apellido: "+Marcos.getApellido());
+//     System.out.println("dni: "+Marcos.getDni());
+        //-------------------------------------------------------------------------------------
+        // MateriaData mtd = new MateriaData();
+        //  Materia Lengua = mtd.buscarMateria(1);
+//    Inscripcion insc = new Inscripcion(Marcos,Encontrar,8);
 //    InscripcionData insdata = new InscripcionData();
-//    
-//    Alumno Marcos = alum.buscarAlumno(17);
-//    Materia Lengua = mtd.buscarMateria(2);
-//    Inscripcion insc = new Inscripcion(Marcos,Lengua,8);
-//    
 //    insdata.guardarInscripcion(insc);
-    //hoola
+        //hoola
 //    ajaja
-
 //    AlumnoData alum = new AlumnoData();
 //    MateriaData mtd = new MateriaData();
 //    InscripcionData insdata = new InscripcionData();
@@ -51,17 +76,14 @@ public class Transversal {
 //    
 //    insdata.guardarInscripcion(insc);
 //  
-    
- 
- //------------------------Buscar Materia id----------------------------------------------------
+        //------------------------Buscar Materia id----------------------------------------------------
 //     MateriaData mtd = new MateriaData();
 //     Materia Encontrar = mtd.buscarMateria(1);
 //     
 //     System.out.println("Nombre: "+Encontrar.getNombre());
 //     System.out.println("Año: "+Encontrar.getAnioMateria());
 //     System.out.println("Estado: "+Encontrar.isActivo());
- 
- //------------------------Alumno Data Pruebas-------------------------------------------------------------   
+        //------------------------Alumno Data Pruebas-------------------------------------------------------------   
 //-----------------------Buscar alumono por ID-----------------------------------------------------------        
 //        AlumnoData a = new AlumnoData();
 //      
@@ -70,7 +92,6 @@ public class Transversal {
 //       System.out.println("Apellido: "+Encontrado.getApellido());
 //       System.out.println("Nombre: "+Encontrado.getNombre());
 //       System.out.println("Fecha de nacimiento:"+Encontrado.getFechaDeNacimiento());
-
         //---------------Modificar alumno---------------------------------------
 //        AlumnoData a = new AlumnoData();
 //        Alumno alumno = new Alumno();

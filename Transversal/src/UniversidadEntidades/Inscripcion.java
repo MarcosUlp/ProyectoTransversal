@@ -29,6 +29,9 @@ public class Inscripcion {
         this.nota = nota;
     }
 
+
+    
+
     public int getIdInscripcion() {
         return idInscripcion;
     }
