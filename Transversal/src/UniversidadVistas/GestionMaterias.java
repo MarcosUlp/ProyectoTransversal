@@ -179,6 +179,7 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "No puede haber campos vacíos");
                 return;
             }
+            //toro
             if (!estado) {
                 Object[] op = {"Si", "No"};
                 String mensaje = "¿Esta seguro de guardar la materia inactiva?";
