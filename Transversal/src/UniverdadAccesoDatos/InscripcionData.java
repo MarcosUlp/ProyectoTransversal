@@ -57,7 +57,7 @@ public class InscripcionData {
         }
     }
 
-    List<Inscripcion> obtenerInscripciones() {
+    public List<Inscripcion> obtenerInscripciones() {
         ArrayList<Inscripcion> cursadas = new ArrayList<>();
         String sql = "SELECT * FROM inscripcion";
         try {
@@ -82,7 +82,7 @@ public class InscripcionData {
         return cursadas;
     }
 
-    List<Inscripcion> obtenerInscripcionesPorAlumno(int idAlumno) {
+    public List<Inscripcion> obtenerInscripcionesPorAlumno(int idAlumno) {
         ArrayList<Inscripcion> cursadas = new ArrayList<>();
         String sql = "SELECT * FROM inscripcion WHERE = idAlumno = ?";
         
@@ -111,13 +111,13 @@ public class InscripcionData {
 
     }
 
-    List<Materia> obtenerMateriasCursadas(int idAlumno) {
+    public List<Materia> obtenerMateriasCursadas(int idAlumno) {
         
         ArrayList <Materia> materias = new ArrayList<>();
         
-        String sql= "SELECT  inscripcion.idMateria, nombre, año, FROM inscripcion,"+
+        String sql= "SELECT  inscripcion.idMateria, nombre, anio, FROM inscripcion,"+
                     "materia WHERE inscripcion.idMateria = materia.idMateria" +
-                    "AND inscripcion.idAlumno=?;";
+                    "AND inscripcion.idAlumno=?";
         
         try{
             PreparedStatement ps = con.prepareStatement(sql);
@@ -138,7 +138,7 @@ public class InscripcionData {
         return materias;
     }
 
-    List<Materia> obtenerMateriasNoCursadas(int idAlumno) {
+    public List<Materia> obtenerMateriasNoCursadas(int idAlumno) {
         
         ArrayList <Materia> materias = new ArrayList<>();
         
