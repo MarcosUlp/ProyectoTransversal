@@ -57,11 +57,25 @@ public class MateriaData {
         }
     }
 
-    public Materia buscarMateria(int id) { //PROBADO Por Arian ;)
+    public void eliminarMateria(int id) { 
+        try {
+            String sql = "UPDATE materia SET estado = 0 WHERE idMateria = ? ";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            int fila = ps.executeUpdate();
 
-        String sql = "SELECT idMateria, nombre, anio, estado FROM materia WHERE idMateria = ? AND estado = 1";
+            if (fila == 1) {
+                JOptionPane.showMessageDialog(null, " Se eliminó la materia.");
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla materia");
+        }
+    }
+
+    public Materia buscarMateria(int id) { //PROBADO Por Arian ;)
+        String sql = "SELECT idMateria, nombre, anio, estado FROM materia WHERE idMateria = ?";
         Materia materia = null;
-        
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
@@ -72,8 +86,7 @@ public class MateriaData {
                 materia.setIdMateria(id);
                 materia.setNombre(rs.getString("nombre"));
                 materia.setAnioMateria(rs.getInt("anio"));
-                materia.setActivo(true);
-
+                materia.setActivo(rs.getBoolean("estado"));
             } else {
                 JOptionPane.showMessageDialog(null, "No existe la materia");
                 ps.close();

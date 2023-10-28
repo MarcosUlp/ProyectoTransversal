@@ -5,6 +5,11 @@
  */
 package UniversidadVistas;
 
+import UniverdadAccesoDatos.MateriaData;
+import UniversidadEntidades.Materia;
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Marcos
@@ -39,7 +44,7 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
         JNuevo = new javax.swing.JButton();
         jEliminar = new javax.swing.JButton();
         jGuardar = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jbSalir = new javax.swing.JButton();
         jEstado = new javax.swing.JRadioButton();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -61,8 +66,18 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
         });
 
         JNuevo.setText("Nuevo");
+        JNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JNuevoActionPerformed(evt);
+            }
+        });
 
         jEliminar.setText("Eliminar");
+        jEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jEliminarActionPerformed(evt);
+            }
+        });
 
         jGuardar.setText("Guardar");
         jGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -71,7 +86,12 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton5.setText("Salir");
+        jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -106,7 +126,7 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jGuardar)
                         .addGap(76, 76, 76)
-                        .addComponent(jButton5))
+                        .addComponent(jbSalir))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(196, 196, 196)
                         .addComponent(jLabel1)))
@@ -140,7 +160,7 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
                     .addComponent(JNuevo)
                     .addComponent(jEliminar)
                     .addComponent(jGuardar)
-                    .addComponent(jButton5))
+                    .addComponent(jbSalir))
                 .addGap(29, 29, 29))
         );
 
@@ -149,20 +169,94 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
 
     private void jGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGuardarActionPerformed
         // TODO add your handling code here:
-        
-        
-        
+        try {
+            Integer codigo = Integer.parseInt(jtCodigo.getText());
+            String nombre = jtNombre.getText();
+            Integer año = Integer.parseInt(jtAño.getText());
+            Boolean estado = jEstado.isSelected();
+            if (nombre.isEmpty()
+                    || año.toString().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No puede haber campos vacíos");
+                return;
+            }
+            if (!estado) {
+                Object[] op = {"Si", "No"};
+                String mensaje = "¿Esta seguro de guardar la materia inactiva?";
+                int opcion = JOptionPane.showOptionDialog(null, mensaje, title,
+                        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+                        null, op, op[0]);
+                if (opcion == 0) {
+                    Materia m = new Materia(codigo, nombre, año, estado);
+                    MateriaData mD = new MateriaData();
+                    mD.agregarMateria(m);
+                }
+            }
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar caracteres válidos: " + ex.getMessage());
+        }
+
+
     }//GEN-LAST:event_jGuardarActionPerformed
 
     private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
-        // TODO add your handling code here:
+        try {
+            String codigoTexto = jtCodigo.getText();
+            if (codigoTexto.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "El campo de código no puede estar vacío");
+                return;
+            } else {
+                Integer codigo = Integer.parseInt(codigoTexto);
+                Materia m = new MateriaData().buscarMateria(codigo);
+                if (m != null) {
+                    jtNombre.setText(m.getNombre());
+                    jtAño.setText(Integer.toString(m.getAnioMateria()));
+                    jEstado.setSelected(m.isActivo());
+                }else{
+                Limpiar();
+                }
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar un número de código válido");
+        }
     }//GEN-LAST:event_jBuscarActionPerformed
 
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEliminarActionPerformed
+        // TODO add your handling code here:
+        try {
+            String codigoTexto = jtCodigo.getText();
+            if (codigoTexto.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "El campo de código no puede estar vacío");
+                return;
+            } else {
+                Integer codigo = Integer.parseInt(codigoTexto);
+                MateriaData m = new MateriaData();
+                m.eliminarMateria(codigo);
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar un número de código válido");
+        }
+    }//GEN-LAST:event_jEliminarActionPerformed
+
+    private void JNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JNuevoActionPerformed
+        // TODO add your handling code here:
+        Limpiar();
+    }//GEN-LAST:event_JNuevoActionPerformed
+    public void Limpiar() {
+        jtAño.setText("");
+        jtNombre.setText("");
+        jtCodigo.setText("");;
+        jEstado.setSelected(false);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JNuevo;
     private javax.swing.JButton jBuscar;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jEliminar;
     private javax.swing.JRadioButton jEstado;
     private javax.swing.JButton jGuardar;
@@ -171,6 +265,7 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JButton jbSalir;
     private javax.swing.JTextField jtAño;
     private javax.swing.JTextField jtCodigo;
     private javax.swing.JTextField jtNombre;
