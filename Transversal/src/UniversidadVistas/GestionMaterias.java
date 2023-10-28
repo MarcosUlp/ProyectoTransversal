@@ -192,12 +192,9 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
                     mD.agregarMateria(m);
                 }
             }
-
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Debe ingresar caracteres válidos: " + ex.getMessage());
         }
-
-
     }//GEN-LAST:event_jGuardarActionPerformed
 
     private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
