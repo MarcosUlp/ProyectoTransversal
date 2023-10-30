@@ -70,6 +70,11 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         jLabel2.setText("Seleccione un alumno");
 
         jcSelecAlumno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcSelecAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcSelecAlumnoActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Listado de Materias");
 
@@ -264,6 +269,10 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         SelectNoInscripto();
     }//GEN-LAST:event_jrNoInscriptosActionPerformed
+
+    private void jcSelecAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcSelecAlumnoActionPerformed
+      SelectInscripto();
+    }//GEN-LAST:event_jcSelecAlumnoActionPerformed
     public void SelectNoInscripto() {
         modelo.setRowCount(0);
         jbAnular.setEnabled(false);
@@ -322,4 +331,7 @@ public class Inscripciones extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton jrNoInscriptos;
     // End of variables declaration//GEN-END:variables
 
+     public void Limpiar() {
+        modelo.setRowCount(0);
+    }
 }
