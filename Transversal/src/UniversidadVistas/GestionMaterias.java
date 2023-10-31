@@ -179,19 +179,22 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "No puede haber campos vacíos");
                 return;
             }
-            //toro
+            int opcion=0;
             if (!estado) {
                 Object[] op = {"Si", "No"};
                 String mensaje = "¿Esta seguro de guardar la materia inactiva?";
-                int opcion = JOptionPane.showOptionDialog(null, mensaje, title,
+                 opcion = JOptionPane.showOptionDialog(null, mensaje, title,
                         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
                         null, op, op[0]);
-                if (opcion == 0) {
+           
+            }
+              if (opcion == 0 || estado) {
                     Materia m = new Materia(codigo, nombre, año, estado);
                     MateriaData mD = new MateriaData();
                     mD.agregarMateria(m);
+           
                 }
-            }
+              
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Debe ingresar caracteres válidos: " + ex.getMessage());
         }

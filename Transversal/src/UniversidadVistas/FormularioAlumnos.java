@@ -220,9 +220,7 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
         try {
             Integer dni = Integer.parseInt(jtDni.getText());
             String nombre = jtNombre.getText();
-
             String apellido = jtApellido.getText();
-
             if (nombre.isEmpty() || apellido.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No puede haber campos vacíos");
                 return;
@@ -310,7 +308,7 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
         jtDni.setText("");
         jtApellido.setText("");
         jtNombre.setText("");
-        jrEstado.setSelected(true);
+        jrEstado.setSelected(false);
         jdcFecha.setDate(new Date());
     }
 }
