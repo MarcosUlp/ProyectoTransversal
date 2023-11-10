@@ -172,7 +172,13 @@ public class UniversidadView extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-      
+        // TODO add your handling code here:
+        Escritorio.removeAll();
+        Escritorio.repaint();
+        AlumnoMateria alummat = new AlumnoMateria();
+        Escritorio.add(alummat);
+        alummat.setVisible(true);
+        Escritorio.moveToFront(alummat);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
