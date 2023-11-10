@@ -221,14 +221,13 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
             Integer dni = Integer.parseInt(jtDni.getText());
             String nombre = jtNombre.getText();
             String apellido = jtApellido.getText();
-            if (nombre.isEmpty() || apellido.isEmpty()) {
+            if (jdcFecha==null || nombre.isEmpty() || apellido.isEmpty() || dni.toString().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No puede haber campos vacíos");
                 return;
-            }
+            }else{
             java.util.Date sfecha = jdcFecha.getDate();
             LocalDate fechaNac = sfecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             Boolean estado = jrEstado.isSelected();
-
             if (alumnoActual == null) {
                 alumnoActual = new Alumno(dni, apellido, nombre, fechaNac, estado);
                 aluData.guardarAlumno(alumnoActual);
@@ -238,6 +237,7 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
                 alumnoActual.setNombre(nombre);
                 alumnoActual.setFechaDeNacimiento(fechaNac);
                 aluData.modificarAlumno(alumnoActual);
+            }
             }
         } catch (NumberFormatException nfe) {
 
@@ -265,6 +265,7 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
             }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Debe ingresar un número válido");
+            Limpiar();
         }
     }//GEN-LAST:event_jBuscarActionPerformed
 
@@ -309,6 +310,6 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
         jtApellido.setText("");
         jtNombre.setText("");
         jrEstado.setSelected(false);
-        jdcFecha.setDate(new Date());
+        jdcFecha.setDate(null);
     }
 }
