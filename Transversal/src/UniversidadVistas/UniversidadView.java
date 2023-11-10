@@ -92,6 +92,11 @@ public class UniversidadView extends javax.swing.JFrame {
         jMenu3.add(jMenuItem3);
 
         jMenuItem4.setText("Manipulacion de notas");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem4);
 
         jMenuBar1.add(jMenu3);
@@ -151,6 +156,15 @@ public class UniversidadView extends javax.swing.JFrame {
         vistaInscri.setVisible(true);
         Escritorio.moveToFront(vistaInscri);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+         Escritorio.removeAll();
+        Escritorio.repaint();
+         ActualizarNota nota = new ActualizarNota();
+        Escritorio.add(nota);
+        nota.setVisible(true);
+        Escritorio.moveToFront(nota);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments
