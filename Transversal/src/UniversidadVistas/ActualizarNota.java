@@ -53,6 +53,7 @@ public class ActualizarNota extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jcSelecAlumno = new javax.swing.JComboBox<>();
@@ -205,40 +206,52 @@ public class ActualizarNota extends javax.swing.JInternalFrame {
     private void jcSelecAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcSelecAlumnoActionPerformed
       SelectInscripto();
     }//GEN-LAST:event_jcSelecAlumnoActionPerformed
-//    public void SelectNoInscripto() {
-//        modelo.setRowCount(0);
-//        jbAnular.setEnabled(false);
-//        jbInscribir.setEnabled(true);
-//        jrInscriptas.setSelected(false);
-//        Alumno al = (Alumno) jcSelecAlumno.getSelectedItem();
-//        ListaMaterias = id.obtenerMateriasNoCursadas(al.getIdAlumno());
-//        Materia m = new Materia();
-//        for (Materia aux : ListaMaterias) {
-//            modelo.addRow(new Object[]{aux.getIdMateria(), aux.getNombre(), aux.getAnioMateria()});
-//        }
+//    public void cambiar nota() {
+//   
+//        
 //    }
 
     public void SelectInscripto() {
 
-        modelo.setRowCount(0);
-    
-        jbInscribir.setEnabled(false);
-      
-        Alumno al = (Alumno) jcSelecAlumno.getSelectedItem();
-   //   ListaMaterias = id.obtenerMateriasCursadas(al.getIdAlumno());
-      listaincripcion = id.obtenerInscripcionesPorAlumno(al.getIdAlumno());
-    
-        for (Inscripcion aux : listaincripcion) {
-            modelo.addRow(new Object[]{aux.getIdInscripcion(), aux.getMateria(),aux.getNota()});
-        }
-      
+//        modelo.setRowCount(0);
+//    
+//        jbInscribir.setEnabled(false);
+//      
+//        Alumno al = (Alumno) jcSelecAlumno.getSelectedItem();
+// 
+//      listaincripcion = id.obtenerInscripcionesPorAlumno(al.getIdAlumno());
+//    
+//        for (Inscripcion aux : listaincripcion) {
+//            modelo.addRow(new Object[]{aux.getIdInscripcion(), aux.getMateria(),aux.getNota()});
+//        }
+//      
+modelo.setRowCount(0); // Limpiar las filas existentes en el modelo
+
+jbInscribir.setEnabled(false); // Deshabilitar el botón (proporciona retroalimentación si es necesario)
+
+Alumno al = (Alumno) jcSelecAlumno.getSelectedItem(); // Obtener el alumno seleccionado
+
+try {
+    listaincripcion = id.obtenerInscripcionesPorAlumno(al.getIdAlumno()); // Obtener las inscripciones
+
+    for (Inscripcion aux : listaincripcion) {
+        modelo.addRow(new Object[]{aux.getIdInscripcion(), aux.getMateria(), aux.getNota()});
+    }
+
+    // Notificar al JTable para que se actualice
+    modelo.fireTableDataChanged();
+
+} catch (Exception e) {
+    // Manejar excepciones (proporcionar retroalimentación al usuario si es necesario)
+    e.printStackTrace(); // Imprime la excepción para propósitos de depuración, puedes manejarla de otra manera según tus necesidades
+}
+
     }
 
     public void armarCabecera() {
         ArrayList<Object> filaCabecera = new ArrayList<>();
         filaCabecera.add("id");
         filaCabecera.add("Materia");
-
         filaCabecera.add("Nota");
         for (Object i : filaCabecera) {
             modelo.addColumn(i);
@@ -256,6 +269,7 @@ public class ActualizarNota extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable;
     private javax.swing.JButton jbInscribir;
     private javax.swing.JComboBox<String> jcSelecAlumno;
