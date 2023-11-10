@@ -111,7 +111,6 @@ public class AlumnoData {
     }
 
     public List<Alumno> listarAlumnos() {//PROBADO
-
         List<Alumno> alumnos = new ArrayList<>();
         try {
             String sql = "SELECT * FROM alumno WHERE estado = 1 ";
