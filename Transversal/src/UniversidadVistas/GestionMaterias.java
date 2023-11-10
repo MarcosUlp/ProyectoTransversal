@@ -45,9 +45,10 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
         jtAño = new javax.swing.JTextField();
         JNuevo = new javax.swing.JButton();
         jEliminar = new javax.swing.JButton();
-        jGuardar = new javax.swing.JButton();
+        Jguardar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
         jEstado = new javax.swing.JRadioButton();
+        jActualizar = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setText("Materia");
@@ -81,10 +82,10 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
             }
         });
 
-        jGuardar.setText("Guardar");
-        jGuardar.addActionListener(new java.awt.event.ActionListener() {
+        Jguardar.setText("Guardar");
+        Jguardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jGuardarActionPerformed(evt);
+                JguardarActionPerformed(evt);
             }
         });
 
@@ -92,6 +93,13 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbSalirActionPerformed(evt);
+            }
+        });
+
+        jActualizar.setText("Actualizar");
+        jActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jActualizarActionPerformed(evt);
             }
         });
 
@@ -105,34 +113,37 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
                         .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(62, 62, 62)
+                                .addComponent(jtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBuscar))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel5))
                                 .addGap(56, 56, 56)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jtAño, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jEstado)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(62, 62, 62)
-                                .addComponent(jtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(55, 55, 55)
-                                .addComponent(jBuscar))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(JNuevo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jEliminar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jGuardar)
-                        .addGap(76, 76, 76)
-                        .addComponent(jbSalir))
+                                    .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jEstado)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(196, 196, 196)
                         .addComponent(jLabel1)))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(168, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(JNuevo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jEliminar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Jguardar)
+                .addGap(18, 18, 18)
+                .addComponent(jActualizar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbSalir)
+                .addGap(19, 19, 19))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,55 +165,54 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
                         .addComponent(jtAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel4))
                 .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jEstado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JNuevo)
-                    .addComponent(jEliminar)
-                    .addComponent(jGuardar)
-                    .addComponent(jbSalir))
-                .addGap(29, 29, 29))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(JNuevo)
+                            .addComponent(jEliminar)
+                            .addComponent(Jguardar)
+                            .addComponent(jbSalir)
+                            .addComponent(jActualizar))
+                        .addGap(29, 29, 29))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jEstado)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGuardarActionPerformed
+    private void JguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JguardarActionPerformed
         try {
-//            Integer codigo = Integer.parseInt(jtCodigo.getText());
             String nombre = jtNombre.getText();
             Integer año = Integer.parseInt(jtAño.getText());
-            Boolean estado = jEstado.isSelected();
+            jEstado.setEnabled(true);
             if (nombre.isEmpty() || año.toString().isEmpty() || año <= 0) {
                 JOptionPane.showMessageDialog(this, "Ingrese valores válidos para Nombre y Año.");
                 return;
+            }else{
+               Materia m = new Materia(nombre, año, true);
+                mD.agregarMateria(m);
             }
-            int opcion = 0;
-            if (!estado) {
-                Object[] opciones = {"Sí", "No"};
-                String mensaje = "¿Está seguro de guardar la materia inactiva?";
-                opcion = JOptionPane.showOptionDialog(null, mensaje, title,
-                        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
-                        null, opciones, opciones[0]);
-            }
-            Materia existente = mD.buscarMateriaPorNombre(nombre);
-            if (opcion == 0 || estado) {
-//                if (existente != null && existente.getNombre().equals(nombre)) {
-                    Materia m = new Materia(nombre, año, estado);
-                    mD.agregarMateria(m);
-//                    JOptionPane.showMessageDialog(this, "Materia guardada correctamente.");
-//                } else {
-//                    JOptionPane.showMessageDialog(this, "Ya existe la materia '" + nombre + "' con el código " );
-//                }
-            }
+//            int opcion = 0;
+//            if (!estado) {
+//                Object[] opciones = {"Sí", "No"};
+//                String mensaje = "¿Está seguro de guardar la materia inactiva?";
+//                opcion = JOptionPane.showOptionDialog(null, mensaje, title,
+//                        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+//                        null, opciones, opciones[0]);
+//            }
+//            if (opcion == 0 || estado) {
+             
+//            }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Debe ingresar valores válidos: " + ex.getMessage());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
-    }//GEN-LAST:event_jGuardarActionPerformed
+    }//GEN-LAST:event_JguardarActionPerformed
 
     private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
         try {
@@ -252,19 +262,42 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         Limpiar();
     }//GEN-LAST:event_JNuevoActionPerformed
+
+    private void jActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jActualizarActionPerformed
+
+        try {
+            String codigoTexto = jtCodigo.getText();
+            if (codigoTexto.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "El campo de código no puede estar vacío");
+                return;
+            } else {
+                Integer codigo = Integer.parseInt(codigoTexto);
+                Materia m = new Materia();
+                m.setIdMateria(codigo);
+                m.setNombre(jtNombre.getText());
+                m.setAnioMateria(Integer.parseInt(jtAño.getText()));
+                mD.ActualizarMateria(m);
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar un número de código válido");
+        }
+
+
+    }//GEN-LAST:event_jActualizarActionPerformed
     public void Limpiar() {
         jtAño.setText("");
         jtNombre.setText("");
         jtCodigo.setText("");;
-        jEstado.setSelected(false);
+        jEstado.setSelected(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JNuevo;
+    private javax.swing.JButton Jguardar;
+    private javax.swing.JButton jActualizar;
     private javax.swing.JButton jBuscar;
     private javax.swing.JButton jEliminar;
     private javax.swing.JRadioButton jEstado;
-    private javax.swing.JButton jGuardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
