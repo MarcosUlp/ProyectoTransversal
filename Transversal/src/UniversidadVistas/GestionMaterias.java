@@ -289,7 +289,8 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
         jtAño.setText("");
         jtNombre.setText("");
         jtCodigo.setText("");;
-        jEstado.setSelected(true);
+          jEstado.setSelected(true);
+        jEstado.setEnabled(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
