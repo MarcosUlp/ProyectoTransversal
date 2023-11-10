@@ -190,6 +190,8 @@ public class InscripcionData {
             int filas = ps.executeUpdate();
             if (filas > 0) {
                 JOptionPane.showMessageDialog(null, "Nota Actualizada");
+            }else{
+                JOptionPane.showMessageDialog(null, "No se pudo actualizar");
             }
             ps.close();
         } catch (SQLException ex) {

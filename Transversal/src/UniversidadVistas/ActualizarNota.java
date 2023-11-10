@@ -176,16 +176,21 @@ public class ActualizarNota extends javax.swing.JInternalFrame {
 
     private void jbInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirActionPerformed
     try {
-        Object valorNota = jTable.getValueAt(0, 2);
-        Object valorAlumno = jTable.getValueAt(0, 0); 
-        Object valorMateria = jTable.getValueAt(0, 1); 
-        if (valorNota != null && valorAlumno != null && valorMateria != null) {
-            int nota = Integer.parseInt(valorNota.toString());
-            int idAlumno = Integer.parseInt(valorAlumno.toString());
-            int idMateria = Integer.parseInt(valorMateria.toString());
-
-            id.actualizarNota(idAlumno, idMateria, nota);
-            JOptionPane.showMessageDialog(null, "Nota actualizada correctamente");
+        int id2 = jTable.getSelectedRow();
+        Object valorNota = jTable.getValueAt(id2, 2);
+        Object valorMateria = jTable.getValueAt(id2, 0); 
+        int valorAlumno = jcSelecAlumno.getSelectedIndex();
+        
+        if (valorNota != null && valorMateria != null && valorAlumno!= -1) {
+            
+            Alumno al = (Alumno)jcSelecAlumno.getSelectedItem();
+            Double nota = Double.parseDouble((String)valorNota);
+            
+            int idMateria = (Integer)valorMateria ;
+            
+            id.actualizarNota(al.getIdAlumno(), idMateria, nota);
+            
+            
         } else {
             JOptionPane.showMessageDialog(null, "Error: Alguno de los valores es nulo");
         }
@@ -217,7 +222,7 @@ public class ActualizarNota extends javax.swing.JInternalFrame {
                 listaincripcion = id.obtenerInscripcionesPorAlumno(alumnoSeleccionado.getIdAlumno());
                 System.out.println(listaincripcion);
                 for (Inscripcion inscripcion : listaincripcion) {
-                    modelo.addRow(new Object[]{inscripcion.getIdInscripcion(), inscripcion.getMateria(), inscripcion.getNota()});
+                    modelo.addRow(new Object[]{inscripcion.getMateria().getIdMateria(), inscripcion.getMateria(), inscripcion.getNota()});
                 }
                 modelo.fireTableDataChanged();
             } catch (Exception e) {
