@@ -19,6 +19,8 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
     /**
      * Creates new form GestionMaterias
      */
+    MateriaData mD = new MateriaData();
+
     public GestionMaterias() {
         initComponents();
     }
@@ -168,35 +170,35 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGuardarActionPerformed
-        // TODO add your handling code here:
         try {
             Integer codigo = Integer.parseInt(jtCodigo.getText());
             String nombre = jtNombre.getText();
             Integer año = Integer.parseInt(jtAño.getText());
             Boolean estado = jEstado.isSelected();
-            if (nombre.isEmpty()
-                    || año.toString().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "No puede haber campos vacíos");
+            if (nombre.isEmpty() || año.toString().isEmpty() || año <= 0) {
+                JOptionPane.showMessageDialog(this, "Ingrese valores válidos para Nombre y Año.");
                 return;
             }
-            int opcion=0;
+            int opcion = 0;
             if (!estado) {
-                Object[] op = {"Si", "No"};
-                String mensaje = "¿Esta seguro de guardar la materia inactiva?";
-                 opcion = JOptionPane.showOptionDialog(null, mensaje, title,
+                Object[] opciones = {"Sí", "No"};
+                String mensaje = "¿Está seguro de guardar la materia inactiva?";
+                opcion = JOptionPane.showOptionDialog(null, mensaje, title,
                         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
-                        null, op, op[0]);
-           
+                        null, opciones, opciones[0]);
             }
-              if (opcion == 0 || estado) {
+            Materia existente = mD.buscarMateriaPorNombre(nombre);
+            if (opcion == 0 || estado) {   
+                if (existente != null && existente.getNombre() != null && existente.getNombre().equals(nombre)) {
                     Materia m = new Materia(codigo, nombre, año, estado);
-                    MateriaData mD = new MateriaData();
                     mD.agregarMateria(m);
-           
+                    JOptionPane.showMessageDialog(this, "Materia guardada correctamente.");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Ya existe la materia '" + nombre + "' con el código " + codigo);
                 }
-              
+            }
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Debe ingresar caracteres válidos: " + ex.getMessage());
+            JOptionPane.showMessageDialog(this, "Debe ingresar valores válidos: " + ex.getMessage());
         }
     }//GEN-LAST:event_jGuardarActionPerformed
 
@@ -213,8 +215,8 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
                     jtNombre.setText(m.getNombre());
                     jtAño.setText(Integer.toString(m.getAnioMateria()));
                     jEstado.setSelected(m.isActivo());
-                }else{
-                Limpiar();
+                } else {
+                    Limpiar();
                 }
             }
         } catch (NumberFormatException ex) {

@@ -5,17 +5,36 @@
  */
 package UniversidadVistas;
 
+import UniverdadAccesoDatos.AlumnoData;
+import UniverdadAccesoDatos.InscripcionData;
+import UniverdadAccesoDatos.MateriaData;
+import UniversidadEntidades.Alumno;
+import UniversidadEntidades.Materia;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author pollo
  */
 public class AlumnoMateria extends javax.swing.JInternalFrame {
 
+    private MateriaData md = new MateriaData();
+    private List<Materia> listaMaterias = md.listarMateria();
+    private DefaultComboBoxModel comboModelA = new DefaultComboBoxModel(listaMaterias.toArray());
+    private List<Alumno> alumnos = new ArrayList();
+    private InscripcionData id = new InscripcionData();
+     DefaultTableModel modelo = new DefaultTableModel();
+
     /**
      * Creates new form AlumnoMateria
      */
     public AlumnoMateria() {
         initComponents();
+        llenarCombo();
+        armarCabecera();
     }
 
     /**
@@ -28,16 +47,23 @@ public class AlumnoMateria extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jCombo = new javax.swing.JComboBox<>();
+        jbSeleccionar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable = new javax.swing.JTable();
 
         jLabel1.setText("Alumno Materia");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jbSeleccionar.setText("Seleccionar");
+        jbSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSeleccionarActionPerformed(evt);
+            }
+        });
+
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -48,33 +74,26 @@ public class AlumnoMateria extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
-
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        jScrollPane2.setViewportView(jTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(65, Short.MAX_VALUE)
+                .addContainerGap(32, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(248, 248, 248))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42)
-                        .addComponent(jButton1)
-                        .addGap(62, 62, 62))
+                        .addComponent(jCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(54, 54, 54)
+                        .addComponent(jbSeleccionar)
+                        .addGap(50, 50, 50))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(54, 54, 54))))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -83,26 +102,46 @@ public class AlumnoMateria extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addGap(37, 37, 37)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                    .addComponent(jCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbSeleccionar))
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSeleccionarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        Limpiar();
+        Materia materia = (Materia) jCombo.getSelectedItem();
+        alumnos = id.obtenerAlumnosXMateria(materia.getIdMateria());
+        Alumno al = new Alumno();
+        for (Alumno x : alumnos){
+            modelo.addRow(new Object[]{x.getNombre(),x.getApellido(),x.getDni()});
+        }
+    }//GEN-LAST:event_jbSeleccionarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jCombo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable;
+    private javax.swing.JButton jbSeleccionar;
     // End of variables declaration//GEN-END:variables
+public void llenarCombo() {
+        jCombo.setModel(comboModelA);
+    }
+
+    public void armarCabecera() {
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Apellido");
+        modelo.addColumn("DNI");
+        jTable.setModel(modelo);
+    }
+    public void Limpiar() {
+        modelo.setRowCount(0);
+    }
 }

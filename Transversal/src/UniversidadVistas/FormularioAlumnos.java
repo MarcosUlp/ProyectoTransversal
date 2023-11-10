@@ -200,50 +200,37 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGuardarActionPerformed
-//        try {
-//            int documento = Integer.parseInt(jtDni.getText());
-//            String apellido = jtApellido.getText();
-//            String nombre = jtNombre.getText();
-//            boolean estado = jrEstado.isSelected();
-//            LocalDate fechaNacimiento = jdcFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-//            if (nombre.isEmpty() || apellido.isEmpty()) {
-//                JOptionPane.showMessageDialog(this, "No debe haber campos vacíos");
-//                return;
-//            }
-//            Alumno a = new Alumno(documento, apellido, nombre, fechaNacimiento, estado);
-//            AlumnoData data = new AlumnoData();
-//            data.guardarAlumno(a);
-//        } catch (NumberFormatException ex) {
-//            JOptionPane.showMessageDialog(this, "Debe ingresar caracteres válidos: " + ex.getMessage());
-//        }
-//-------------------------Probando vesion 2---------------------------------------------------
         try {
             Integer dni = Integer.parseInt(jtDni.getText());
             String nombre = jtNombre.getText();
             String apellido = jtApellido.getText();
-            if (jdcFecha==null || nombre.isEmpty() || apellido.isEmpty() || dni.toString().isEmpty()) {
+            if (jdcFecha.getDate() == null || nombre.isEmpty() || apellido.isEmpty() || jtDni.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No puede haber campos vacíos");
                 return;
-            }else{
-            java.util.Date sfecha = jdcFecha.getDate();
-            LocalDate fechaNac = sfecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            Boolean estado = jrEstado.isSelected();
-            if (alumnoActual == null) {
-                alumnoActual = new Alumno(dni, apellido, nombre, fechaNac, estado);
-                aluData.guardarAlumno(alumnoActual);
             } else {
-                alumnoActual.setDni(dni);
-                alumnoActual.setApellido(apellido);
-                alumnoActual.setNombre(nombre);
-                alumnoActual.setFechaDeNacimiento(fechaNac);
-                aluData.modificarAlumno(alumnoActual);
-            }
+                java.util.Date sfecha = jdcFecha.getDate();
+                LocalDate fechaNac = sfecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                Boolean estado = jrEstado.isSelected();
+                if (alumnoActual == null) {
+                    
+                    alumnoActual = new Alumno(dni, apellido, nombre, fechaNac, estado);
+                    aluData.guardarAlumno(alumnoActual);
+                    
+                } else {
+                  
+                    
+                    alumnoActual.setDni(dni);
+                    alumnoActual.setApellido(apellido);
+                    alumnoActual.setNombre(nombre);
+                    alumnoActual.setFechaDeNacimiento(fechaNac);
+                    aluData.modificarAlumno(alumnoActual);
+          
+                }
             }
         } catch (NumberFormatException nfe) {
-
+            JOptionPane.showMessageDialog(this, "Debe ingresar un DNI válido: " + nfe.getMessage());
+      
         }
-
-
     }//GEN-LAST:event_jGuardarActionPerformed
 
     private void jSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSalirActionPerformed
@@ -280,8 +267,8 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
             aluData.eliminarAlumno(alumnoActual.getIdAlumno());
             alumnoActual = null;
             Limpiar();
-        }else{
-            JOptionPane.showMessageDialog (this, "No hay un alumno seleccionado");
+        } else {
+            JOptionPane.showMessageDialog(this, "No hay un alumno seleccionado");
         }
     }//GEN-LAST:event_jEliminarActionPerformed
 
