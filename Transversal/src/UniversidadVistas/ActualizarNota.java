@@ -175,27 +175,16 @@ public class ActualizarNota extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirActionPerformed
-        // TODO add your handling code here:
-//        Alumno al = (Alumno) jcSelecAlumno.getSelectedItem();
-//        int filaSeleccionada = jTable.getSelectedRow();
-//
-//        TableModel model = jTable.getModel();
-//
-//        if (filaSeleccionada != -1) {
-//
-//            Integer id_Materia = (Integer) model.getValueAt(filaSeleccionada, 0);
-//            String nombre = (String) model.getValueAt(filaSeleccionada, 1);
-//            Integer anio = (Integer) model.getValueAt(filaSeleccionada, 2);
-//
-//            Materia m = new Materia(id_Materia, nombre, anio, true);
-//
-//            Inscripcion i = new Inscripcion(al, m, 0);
-//            id.guardarInscripcion(i);
-//            JOptionPane.showMessageDialog(null, "Alumno inscripto correctamente");
-//            SelectNoInscripto();
-//        } else {
-//            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
-//        }
+       
+       Object valor = jTable.getValueAt( 1, 0);
+      int nota = Integer.parseInt(valor.toString());
+      Object alumno = jTable.getValueAt( 2, 0);
+      int idalumno = Integer.parseInt(alumno.toString());
+      Object materia1 = jTable.getValueAt( 3, 0);
+      int idemateria = Integer.parseInt(materia1.toString());
+      
+      id.actualizarNota(idalumno, idemateria, nota);
+      
     }//GEN-LAST:event_jbInscribirActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -214,7 +203,7 @@ public class ActualizarNota extends javax.swing.JInternalFrame {
 
    public void seleccionarInscripciones() {
     modelo.setRowCount(0);
-    jbInscribir.setEnabled(false);
+    jbInscribir.setEnabled(true);
 
     Alumno alumnoSeleccionado = (Alumno) jcSelecAlumno.getSelectedItem();
 
