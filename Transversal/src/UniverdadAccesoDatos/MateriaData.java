@@ -83,14 +83,14 @@ public class MateriaData {
     }
 
     public Materia buscarMateria(int id) { //PROBADO Por Arian ;)
-        String sql = "SELECT idMateria, nombre, anio, estado FROM materia WHERE idMateria = ?";
+        String sql = "SELECT idMateria, nombre, anio, estado FROM materia WHERE idMateria = ? AND estado = 1";
         Materia materia = null;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                JOptionPane.showMessageDialog(null, "La materia exite");
+                JOptionPane.showMessageDialog(null, "La materia existe");
                 materia = new Materia();
                 materia.setIdMateria(id);
                 materia.setNombre(rs.getString("nombre"));

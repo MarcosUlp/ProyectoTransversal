@@ -23,6 +23,7 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
 
     public GestionMaterias() {
         initComponents();
+        Limpiar();
     }
 
     /**
@@ -192,8 +193,8 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
             if (nombre.isEmpty() || año.toString().isEmpty() || año <= 0) {
                 JOptionPane.showMessageDialog(this, "Ingrese valores válidos para Nombre y Año.");
                 return;
-            }else{
-               Materia m = new Materia(nombre, año, true);
+            } else {
+                Materia m = new Materia(nombre, año, true);
                 mD.agregarMateria(m);
             }
 //            int opcion = 0;
@@ -205,7 +206,7 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
 //                        null, opciones, opciones[0]);
 //            }
 //            if (opcion == 0 || estado) {
-             
+
 //            }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Debe ingresar valores válidos: " + ex.getMessage());

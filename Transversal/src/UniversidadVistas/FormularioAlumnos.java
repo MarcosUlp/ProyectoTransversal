@@ -26,6 +26,7 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
 
     public FormularioAlumnos() {
         initComponents();
+        Limpiar();
     }
 
     /**
@@ -201,6 +202,7 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
 
     private void jGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGuardarActionPerformed
         try {
+            
             Integer dni = Integer.parseInt(jtDni.getText());
             String nombre = jtNombre.getText();
             String apellido = jtApellido.getText();
@@ -210,9 +212,9 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
             } else {
                 java.util.Date sfecha = jdcFecha.getDate();
                 LocalDate fechaNac = sfecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                Boolean estado = jrEstado.isSelected();
+          
                 if (alumnoActual == null) {
-                    alumnoActual = new Alumno(dni, apellido, nombre, fechaNac, estado);
+                    alumnoActual = new Alumno(dni, apellido, nombre, fechaNac, true);
                     aluData.guardarAlumno(alumnoActual);
                 } else {
                     alumnoActual.setDni(dni);
@@ -291,7 +293,8 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
         jtDni.setText("");
         jtApellido.setText("");
         jtNombre.setText("");
-        jrEstado.setSelected(false);
+        jrEstado.setSelected(true);
+        jrEstado.setEnabled(false);
         jdcFecha.setDate(null);
     }
 }
