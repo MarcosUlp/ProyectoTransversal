@@ -175,16 +175,26 @@ public class ActualizarNota extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirActionPerformed
-       
-       Object valor = jTable.getValueAt( 1, 0);
-      int nota = Integer.parseInt(valor.toString());
-      Object alumno = jTable.getValueAt( 2, 0);
-      int idalumno = Integer.parseInt(alumno.toString());
-      Object materia1 = jTable.getValueAt( 3, 0);
-      int idemateria = Integer.parseInt(materia1.toString());
-      
-      id.actualizarNota(idalumno, idemateria, nota);
-      
+    try {
+        Object valorNota = jTable.getValueAt(0, 2);
+        Object valorAlumno = jTable.getValueAt(0, 0); 
+        Object valorMateria = jTable.getValueAt(0, 1); 
+        if (valorNota != null && valorAlumno != null && valorMateria != null) {
+            int nota = Integer.parseInt(valorNota.toString());
+            int idAlumno = Integer.parseInt(valorAlumno.toString());
+            int idMateria = Integer.parseInt(valorMateria.toString());
+
+            id.actualizarNota(idAlumno, idMateria, nota);
+            JOptionPane.showMessageDialog(null, "Nota actualizada correctamente");
+        } else {
+            JOptionPane.showMessageDialog(null, "Error: Alguno de los valores es nulo");
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "Error: No se puede convertir la nota a número");
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+        e.printStackTrace();
+    }
     }//GEN-LAST:event_jbInscribirActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -194,38 +204,28 @@ public class ActualizarNota extends javax.swing.JInternalFrame {
 
     private void jcSelecAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcSelecAlumnoActionPerformed
         seleccionarInscripciones();
-        
     }//GEN-LAST:event_jcSelecAlumnoActionPerformed
-//    public void cambiar nota() {
-//   
-//        
-//    }
 
-   public void seleccionarInscripciones() {
-    modelo.setRowCount(0);
-    jbInscribir.setEnabled(true);
+    public void seleccionarInscripciones() {
+        modelo.setRowCount(0);
+        jbInscribir.setEnabled(true);
 
-    Alumno alumnoSeleccionado = (Alumno) jcSelecAlumno.getSelectedItem();
+        Alumno alumnoSeleccionado = (Alumno) jcSelecAlumno.getSelectedItem();
 
-    if (alumnoSeleccionado != null) {
-        try {
-            listaincripcion = id.obtenerInscripcionesPorAlumno(alumnoSeleccionado.getIdAlumno());
-
-          
-            System.out.println(listaincripcion);
-
-            for (Inscripcion inscripcion : listaincripcion) {
-                modelo.addRow(new Object[]{inscripcion.getIdInscripcion(), inscripcion.getMateria(), inscripcion.getNota()});
+        if (alumnoSeleccionado != null) {
+            try {
+                listaincripcion = id.obtenerInscripcionesPorAlumno(alumnoSeleccionado.getIdAlumno());
+                System.out.println(listaincripcion);
+                for (Inscripcion inscripcion : listaincripcion) {
+                    modelo.addRow(new Object[]{inscripcion.getIdInscripcion(), inscripcion.getMateria(), inscripcion.getNota()});
+                }
+                modelo.fireTableDataChanged();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error al obtener inscripciones: " + e.getMessage());
+                e.printStackTrace();
             }
-            modelo.fireTableDataChanged();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al obtener inscripciones: " + e.getMessage());
-            e.printStackTrace();
         }
     }
-}
-
-
 
     public void armarCabecera() {
         ArrayList<Object> filaCabecera = new ArrayList<>();
@@ -241,7 +241,6 @@ public class ActualizarNota extends javax.swing.JInternalFrame {
     public void llenarCBAlumnos() {
         jcSelecAlumno.setModel(comboModelA);
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
