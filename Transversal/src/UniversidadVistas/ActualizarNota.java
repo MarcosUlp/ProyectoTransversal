@@ -40,8 +40,8 @@ public class ActualizarNota extends javax.swing.JInternalFrame {
         initComponents();
         armarCabecera();
         llenarCBAlumnos();
-      //  SelectInscripto();
-      //  jrInscriptas.setSelected(true);
+        //  SelectInscripto();
+        //  jrInscriptas.setSelected(true);
     }
 
     /**
@@ -204,49 +204,39 @@ public class ActualizarNota extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jcSelecAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcSelecAlumnoActionPerformed
-      SelectInscripto();
+        seleccionarInscripciones();
+        
     }//GEN-LAST:event_jcSelecAlumnoActionPerformed
 //    public void cambiar nota() {
 //   
 //        
 //    }
 
-    public void SelectInscripto() {
+   public void seleccionarInscripciones() {
+    modelo.setRowCount(0);
+    jbInscribir.setEnabled(false);
 
-//        modelo.setRowCount(0);
-//    
-//        jbInscribir.setEnabled(false);
-//      
-//        Alumno al = (Alumno) jcSelecAlumno.getSelectedItem();
-// 
-//      listaincripcion = id.obtenerInscripcionesPorAlumno(al.getIdAlumno());
-//    
-//        for (Inscripcion aux : listaincripcion) {
-//            modelo.addRow(new Object[]{aux.getIdInscripcion(), aux.getMateria(),aux.getNota()});
-//        }
-//      
-modelo.setRowCount(0); // Limpiar las filas existentes en el modelo
+    Alumno alumnoSeleccionado = (Alumno) jcSelecAlumno.getSelectedItem();
 
-jbInscribir.setEnabled(false); // Deshabilitar el botón (proporciona retroalimentación si es necesario)
+    if (alumnoSeleccionado != null) {
+        try {
+            listaincripcion = id.obtenerInscripcionesPorAlumno(alumnoSeleccionado.getIdAlumno());
 
-Alumno al = (Alumno) jcSelecAlumno.getSelectedItem(); // Obtener el alumno seleccionado
+          
+            System.out.println(listaincripcion);
 
-try {
-    listaincripcion = id.obtenerInscripcionesPorAlumno(al.getIdAlumno()); // Obtener las inscripciones
-
-    for (Inscripcion aux : listaincripcion) {
-        modelo.addRow(new Object[]{aux.getIdInscripcion(), aux.getMateria(), aux.getNota()});
+            for (Inscripcion inscripcion : listaincripcion) {
+                modelo.addRow(new Object[]{inscripcion.getIdInscripcion(), inscripcion.getMateria(), inscripcion.getNota()});
+            }
+            modelo.fireTableDataChanged();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al obtener inscripciones: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
-
-    // Notificar al JTable para que se actualice
-    modelo.fireTableDataChanged();
-
-} catch (Exception e) {
-    // Manejar excepciones (proporcionar retroalimentación al usuario si es necesario)
-    e.printStackTrace(); // Imprime la excepción para propósitos de depuración, puedes manejarla de otra manera según tus necesidades
 }
 
-    }
+
 
     public void armarCabecera() {
         ArrayList<Object> filaCabecera = new ArrayList<>();
@@ -258,7 +248,8 @@ try {
         }
         jTable.setModel(modelo);
     }
-    public void llenarCBAlumnos(){
+
+    public void llenarCBAlumnos() {
         jcSelecAlumno.setModel(comboModelA);
     }
 
@@ -275,7 +266,8 @@ try {
     private javax.swing.JComboBox<String> jcSelecAlumno;
     // End of variables declaration//GEN-END:variables
 
-     public void Limpiar() {
+    public void Limpiar() {
         modelo.setRowCount(0);
+        jbInscribir.enable(true);
     }
 }

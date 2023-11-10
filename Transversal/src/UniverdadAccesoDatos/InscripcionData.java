@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -35,26 +36,29 @@ public class InscripcionData {
 
     public void guardarInscripcion(Inscripcion insc) {
         String sql = "INSERT INTO inscripcion(nota, idAlumno, idMateria) VALUES ( ?, ?, ?)";
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            //  ps.setInt(1, insc.getIdInscripcion());
+        try (PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setDouble(1, insc.getNota());
-            ps.setInt(2, insc.getAlumno().getIdAlumno());
-            ps.setInt(3, insc.getMateria().getIdMateria());
-            ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
-
-            if (rs.next()) {
-                insc.setIdInscripcion(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Inscripción Registrada");
-                System.out.println("Inscripción guardada exitosamente.");
+            ps.setInt(2, insc.getAlumno() != null ? insc.getAlumno().getIdAlumno() : 0);
+            ps.setInt(3, insc.getMateria() != null ? insc.getMateria().getIdMateria() : 0);
+            int affectedRows = ps.executeUpdate();
+            if (affectedRows > 0) {
+                try (ResultSet rs = ps.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        insc.setIdInscripcion(rs.getInt(1));
+                        JOptionPane.showMessageDialog(null, "Inscripción Registrada");
+                        System.out.println("Inscripción guardada exitosamente.");
+                    } else {
+                        System.out.println("Error al obtener claves generadas.");
+                    }
+                }
             } else {
-                System.out.println("Error al guardar la inscripción.");
+                System.out.println("La inserción no afectó ninguna fila.");
             }
-            ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno" + ex.getMessage());
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion: " + ex.getMessage());
         }
+
     }
 
     public List<Inscripcion> obtenerInscripciones() {
@@ -72,7 +76,6 @@ public class InscripcionData {
                 in.setMateria(mat);
                 in.setNota(rs.getDouble("nota"));
                 cursadas.add(in);
-
             }
             ps.close();
 
@@ -85,15 +88,13 @@ public class InscripcionData {
     public List<Inscripcion> obtenerInscripcionesPorAlumno(int idAlumno) {
         ArrayList<Inscripcion> cursadas = new ArrayList<>();
         String sql = "SELECT * FROM inscripcion WHERE idAlumno = ?";
-
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
             ps.setInt(1, idAlumno);
-
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Inscripcion in = new Inscripcion();
-                in.setIdInscripcion(rs.getInt("idInscripcion"));
+                in.setIdInscripcion(rs.getInt("idInscripto"));
                 Alumno alu = ad.buscarAlumno(rs.getInt("idAlumno"));
                 Materia mat = md.buscarMateria(rs.getInt("idMateria"));
                 in.setAlumno(alu);
@@ -105,6 +106,7 @@ public class InscripcionData {
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion");
+            System.out.println(ex.getMessage());
         }
         return cursadas;
     }
@@ -154,9 +156,9 @@ public class InscripcionData {
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Inscripciones")
-                   ;System.out.println(ex.getMessage());
-                           ;
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Inscripciones");
+            System.out.println(ex.getMessage());
+            ;
         }
         return materias;
     }
@@ -196,7 +198,7 @@ public class InscripcionData {
 
     }
 
-     public List<Alumno> obtenerAlumnosXMateria(int idMateria) {
+    public List<Alumno> obtenerAlumnosXMateria(int idMateria) {
         ArrayList<Alumno> alumnos = new ArrayList<>();
         String sql = "SELECT a.idAlumno, dni, nombre, apellido,fechaDeNacimiento,estado "
                 + "FROM inscripcion i,alumno a WHERE i.idAlumno = a.idAlumno AND idMateria = ? AND a.estado = 1";
