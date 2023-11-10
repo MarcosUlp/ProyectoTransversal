@@ -29,6 +29,7 @@ public class ActualizarNota extends javax.swing.JInternalFrame {
     private InscripcionData id = new InscripcionData();
     private List<Alumno> ListaAlumnos = ad.listarAlumnos();
     private List<Materia> ListaMaterias = new ArrayList<>();
+    private List<Inscripcion> listaincripcion = new ArrayList<>();
     private DefaultComboBoxModel comboModelA = new DefaultComboBoxModel(ListaAlumnos.toArray());
     private DefaultTableModel modelo = new DefaultTableModel();
 
@@ -224,7 +225,8 @@ public class ActualizarNota extends javax.swing.JInternalFrame {
         jbInscribir.setEnabled(false);
        // jrNoInscriptos.setSelected(false);
         Alumno al = (Alumno) jcSelecAlumno.getSelectedItem();
-        ListaMaterias = id.obtenerMateriasCursadas(al.getIdAlumno());
+      ListaMaterias = id.obtenerMateriasCursadas(al.getIdAlumno());
+       //listaincripcion = 
         Materia m = new Materia();
         for (Materia aux : ListaMaterias) {
             modelo.addRow(new Object[]{aux.getIdMateria(), aux.getNombre(), aux.getAnioMateria()});
