@@ -189,7 +189,7 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
             }
             Materia existente = mD.buscarMateriaPorNombre(nombre);
             if (opcion == 0 || estado) {   
-                if (existente != null && existente.getNombre() != null && existente.getNombre().equals(nombre)) {
+                if (existente != null && existente.getNombre().equals(nombre)) {
                     Materia m = new Materia(codigo, nombre, año, estado);
                     mD.agregarMateria(m);
                     JOptionPane.showMessageDialog(this, "Materia guardada correctamente.");
