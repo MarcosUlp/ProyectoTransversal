@@ -212,19 +212,14 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
                 LocalDate fechaNac = sfecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 Boolean estado = jrEstado.isSelected();
                 if (alumnoActual == null) {
-                    
                     alumnoActual = new Alumno(dni, apellido, nombre, fechaNac, estado);
                     aluData.guardarAlumno(alumnoActual);
-                    
                 } else {
-                  
-                    
                     alumnoActual.setDni(dni);
                     alumnoActual.setApellido(apellido);
                     alumnoActual.setNombre(nombre);
                     alumnoActual.setFechaDeNacimiento(fechaNac);
                     aluData.modificarAlumno(alumnoActual);
-          
                 }
             }
         } catch (NumberFormatException nfe) {

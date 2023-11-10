@@ -171,7 +171,7 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
 
     private void jGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGuardarActionPerformed
         try {
-            Integer codigo = Integer.parseInt(jtCodigo.getText());
+//            Integer codigo = Integer.parseInt(jtCodigo.getText());
             String nombre = jtNombre.getText();
             Integer año = Integer.parseInt(jtAño.getText());
             Boolean estado = jEstado.isSelected();
@@ -188,17 +188,19 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
                         null, opciones, opciones[0]);
             }
             Materia existente = mD.buscarMateriaPorNombre(nombre);
-            if (opcion == 0 || estado) {   
-                if (existente != null && existente.getNombre().equals(nombre)) {
-                    Materia m = new Materia(codigo, nombre, año, estado);
+            if (opcion == 0 || estado) {
+//                if (existente != null && existente.getNombre().equals(nombre)) {
+                    Materia m = new Materia(nombre, año, estado);
                     mD.agregarMateria(m);
-                    JOptionPane.showMessageDialog(this, "Materia guardada correctamente.");
-                } else {
-                    JOptionPane.showMessageDialog(this, "Ya existe la materia '" + nombre + "' con el código " + codigo);
-                }
+//                    JOptionPane.showMessageDialog(this, "Materia guardada correctamente.");
+//                } else {
+//                    JOptionPane.showMessageDialog(this, "Ya existe la materia '" + nombre + "' con el código " );
+//                }
             }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Debe ingresar valores válidos: " + ex.getMessage());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
     }//GEN-LAST:event_jGuardarActionPerformed
 
