@@ -221,17 +221,17 @@ public class ActualizarNota extends javax.swing.JInternalFrame {
     public void SelectInscripto() {
 
         modelo.setRowCount(0);
-     //   jbAnular.setEnabled(true);
+    
         jbInscribir.setEnabled(false);
-       // jrNoInscriptos.setSelected(false);
+      
         Alumno al = (Alumno) jcSelecAlumno.getSelectedItem();
       ListaMaterias = id.obtenerMateriasCursadas(al.getIdAlumno());
-       //listaincripcion = 
+    
         Materia m = new Materia();
         for (Materia aux : ListaMaterias) {
             modelo.addRow(new Object[]{aux.getIdMateria(), aux.getNombre(), aux.getAnioMateria()});
         }
-        //jrInscriptas.setSelected(true);
+      
     }
 
     public void armarCabecera() {
