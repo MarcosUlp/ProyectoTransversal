@@ -225,11 +225,11 @@ public class ActualizarNota extends javax.swing.JInternalFrame {
         jbInscribir.setEnabled(false);
       
         Alumno al = (Alumno) jcSelecAlumno.getSelectedItem();
-      ListaMaterias = id.obtenerMateriasCursadas(al.getIdAlumno());
+   //   ListaMaterias = id.obtenerMateriasCursadas(al.getIdAlumno());
+      listaincripcion = id.obtenerInscripcionesPorAlumno(al.getIdAlumno());
     
-        Materia m = new Materia();
-        for (Materia aux : ListaMaterias) {
-            modelo.addRow(new Object[]{aux.getIdMateria(), aux.getNombre(), aux.getAnioMateria()});
+        for (Inscripcion aux : listaincripcion) {
+            modelo.addRow(new Object[]{aux.getIdInscripcion(), aux.getMateria(),aux.getNota()});
         }
       
     }
@@ -237,8 +237,8 @@ public class ActualizarNota extends javax.swing.JInternalFrame {
     public void armarCabecera() {
         ArrayList<Object> filaCabecera = new ArrayList<>();
         filaCabecera.add("id");
-        filaCabecera.add("Nombre");
-        filaCabecera.add("Año");
+        filaCabecera.add("Materia");
+
         filaCabecera.add("Nota");
         for (Object i : filaCabecera) {
             modelo.addColumn(i);
