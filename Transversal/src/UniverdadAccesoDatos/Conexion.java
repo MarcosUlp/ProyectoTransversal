@@ -57,7 +57,7 @@ public class Conexion {
                         + "&password="
                         + DATABASE_PASSWORD
                 );
-                JOptionPane.showMessageDialog(null,"conectado");
+                System.out.println("conectado");
             } catch (SQLException ex) {
                System.out.println(ex.getMessage());
             }

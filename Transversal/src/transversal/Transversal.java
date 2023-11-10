@@ -29,20 +29,24 @@ public class Transversal {
     public static void main(String[] args) {
 
         //------------------------Incripcion Data Pruebas------------------------------------------------}
-           AlumnoData ad = new AlumnoData();
-       Alumno ricardo = ad.buscarAlumno(15);
+//           AlumnoData ad = new AlumnoData();
+//       Alumno ricardo = ad.buscarAlumno(15);
         MateriaData md = new MateriaData();
-          Materia mate = md.buscarMateria(1);
-      
-          System.out.println(mate);
-      //  InscripcionData id = new InscripcionData();
+        Materia m=new Materia(8, "dd", 2, true);
+        md.agregarMateria(m);
         
         
-       
-       
-
-
-        Inscripcion insc = new Inscripcion(ricardo, mate, 8);
+//          Materia mate = md.buscarMateria(1);
+//      
+//          System.out.println(mate);
+//      //  InscripcionData id = new InscripcionData();
+//        
+//        
+//       
+//       
+//
+//
+//        Inscripcion insc = new Inscripcion(ricardo, mate, 8);
 
       //  id.guardarInscripcion(insc);
 //       id.actualizarNota(14, 1, 7);
